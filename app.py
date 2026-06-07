@@ -82,7 +82,7 @@ def get_socket_status():
                 "java",
                 "-cp",
                 "Java",
-                "SocketClientCekSlot"
+                "SocketPingClient"
             ],
             capture_output=True,
             text=True,
@@ -91,10 +91,10 @@ def get_socket_status():
 
         output = result.stdout.strip()
 
-        if "ERROR" in output:
-            return "OFFLINE"
+        if output == "SOCKET_OK":
+            return "ONLINE"
 
-        return "ONLINE"
+        return "OFFLINE"
 
     except:
         return "OFFLINE"
@@ -216,6 +216,44 @@ def masuk():
     )
     
     
+#================================
+# Route untuk halaman Gate Masuk Socket
+#================================
+    
+@app.route("/masuk_socket", methods=["GET", "POST"])
+def masuk_socket():
+
+    hasil = None
+
+    if request.method == "POST":
+
+        rfid = request.form["rfid"].strip().upper()
+
+        try:
+
+            result = subprocess.run(
+                [
+                    "java",
+                    "-cp",
+                    "Java",
+                    "SocketClientMasuk",
+                    rfid
+                ],
+                capture_output=True,
+                text=True
+            )
+
+            hasil = result.stdout.strip()
+
+        except Exception as e:
+
+            hasil = str(e)
+
+    return render_template(
+        "masuk_socket.html",
+        hasil=hasil
+    )
+    
     
     
     
@@ -247,6 +285,7 @@ def keluar():
             )
 
             hasil = result.stdout.strip()
+            
 
             if result.stderr:
                 hasil += "\n" + result.stderr
@@ -257,6 +296,44 @@ def keluar():
 
     return render_template(
         "keluar.html",
+        hasil=hasil
+    )
+    
+    
+    #================================
+# Route untuk halaman Gate Keluar Socket
+#  ===============================
+@app.route("/keluar_socket", methods=["GET", "POST"])
+def keluar_socket():
+
+    hasil = None
+
+    if request.method == "POST":
+
+        rfid = request.form["rfid"].strip().upper()
+
+        try:
+
+            result = subprocess.run(
+                [
+                    "java",
+                    "-cp",
+                    "Java",
+                    "SocketClientKeluar",
+                    rfid
+                ],
+                capture_output=True,
+                text=True
+            )
+
+            hasil = result.stdout.strip()
+
+        except Exception as e:
+
+            hasil = str(e)
+
+    return render_template(
+        "keluar_socket.html",
         hasil=hasil
     )
     

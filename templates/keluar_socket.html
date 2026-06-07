@@ -1,0 +1,41 @@
+    <!doctype html>
+    <html>
+    <head>
+        <title>Gate Keluar Socket</title>
+
+        <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
+
+    <body>
+        <div class="container">
+        <h1>🚪 Gate Keluar Socket</h1>
+
+        <p>Validasi RFID Keluar menggunakan TCP Socket</p>
+
+        <form method="POST">
+            <input type="text" name="rfid" placeholder="Masukkan RFID" required />
+
+            <br /><br />
+
+            <button type="submit">Validasi RFID Keluar</button>
+        </form>
+
+        {% if hasil %}
+
+        <div class="result-box">
+            <h3>Hasil Validasi</h3>
+
+            <p>{{ hasil }}</p>
+        </div>
+
+        {% endif %}
+
+        <br />
+
+        <a href="/"> ⬅ Kembali ke Dashboard </a>
+        </div>
+    </body>
+    </html>

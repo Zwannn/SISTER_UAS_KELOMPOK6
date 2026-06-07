@@ -9,34 +9,25 @@ public class SocketClientCekSlot {
 
         try {
 
-            Socket socket =
-                    new Socket(
-                            "localhost",
-                            4500
-                    );
+            Socket socket = new Socket(
+                    "localhost",
+                    4500);
 
-            PrintWriter out =
-                    new PrintWriter(
-                            socket.getOutputStream(),
-                            true
-                    );
+            PrintWriter out = new PrintWriter(
+                    socket.getOutputStream(),
+                    true);
 
-            BufferedReader in =
-                    new BufferedReader(
-                            new InputStreamReader(
-                                    socket.getInputStream()
-                            )
-                    );
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            socket.getInputStream()));
 
             out.println("SLOT");
 
-            String response =
-                    in.readLine();
+            String response = in.readLine();
 
             System.out.println(
                     "Slot tersedia: "
-                            + response
-            );
+                            + response);
 
             socket.close();
 
@@ -45,9 +36,7 @@ public class SocketClientCekSlot {
         catch (Exception e) {
 
             System.out.println(
-                    "ERROR: "
-                            + e.getMessage()
-            );
+                    "[ERROR] Validation Server OFFLINE");
 
         }
 

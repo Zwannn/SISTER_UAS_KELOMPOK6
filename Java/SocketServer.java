@@ -53,21 +53,59 @@ public class SocketServer {
 
                         String response;
 
-                        if (request.startsWith("MASUK:")) {
+                        // =====================
+                        // PING
+                        // =====================
+                        if (request.equals("PING")) {
 
-                                String rfid = request.substring(6);
+                                response = "SOCKET_OK";
+
+                        }
+
+                        // =====================
+                        // MASUK
+                        // =====================
+                        else if (request.startsWith("MASUK:")) {
 
                                 ParkingInterface server = (ParkingInterface) Naming.lookup(
                                                 "rmi://localhost:1099/ParkingService");
+
+                                String rfid = request.substring(6);
 
                                 response = server.validasiMasuk(rfid);
 
                         }
 
+                        // =====================
+                        // KELUAR
+                        // =====================
+                        else if (request.startsWith("KELUAR:")) {
+
+                                ParkingInterface server = (ParkingInterface) Naming.lookup(
+                                                "rmi://localhost:1099/ParkingService");
+
+                                String rfid = request.substring(7);
+
+                                response = server.validasiKeluar(rfid);
+
+                        }
+
+                        // =====================
+                        // SLOT
+                        // =====================
+                        else if (request.equals("SLOT")) {
+
+                                ParkingInterface server = (ParkingInterface) Naming.lookup(
+                                                "rmi://localhost:1099/ParkingService");
+
+                                response = String.valueOf(
+                                                server.cekSlot());
+
+                        }
 
                         else {
 
-                                response = "REQUEST TIDAK DIKENAL";
+                                response = "VALIDATION_SERVER_OFFLINE";
 
                         }
 
@@ -78,6 +116,9 @@ public class SocketServer {
                 }
 
                 catch (Exception e) {
+
+                        System.out.println(
+                                        "[ERROR] Validation Server OFFLINE");
 
                         e.printStackTrace();
 

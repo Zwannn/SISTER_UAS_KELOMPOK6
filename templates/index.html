@@ -1,61 +1,73 @@
-    <!doctype html>
-    <html>
-    <head>
-        <title>Smart Parking System</title>
+<!doctype html>
+<html>
+  <head>
+    <title>Smart Parking System</title>
 
-        <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-        />
-    </head>
-    <body>
-        <div class="container">
-        <h1>🚗 Smart Parking System</h1>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚗 Smart Parking System</h1>
 
-        <p class="subtitle">
-            Distributed Gate Access System menggunakan Java RMI
-        </p>
+      <p class="subtitle">
+        Distributed Gate Access System menggunakan Java RMI
+      </p>
 
-        <div class="status-container">
-            <div class="card">
-            <h3>RMI Server</h3>
+      <div class="status-container">
+        <div class="card">
+          <h3>RMI Server</h3>
 
-            {% if rmi_status == "ONLINE" %}
-            <h2 class="online">🟢 ONLINE</h2>
-            {% else %}
-            <h2 class="offline">🔴 OFFLINE</h2>
-            {% endif %}
-            </div>
-
-            <div class="card">
-            <h3>Socket Server</h3>
-
-            {% if socket_status == "ONLINE" %}
-            <h2 class="online">🟢 ONLINE</h2>
-            {% else %}
-            <h2 class="offline">🔴 OFFLINE</h2>
-            {% endif %}
-            </div>
+          {% if rmi_status == "ONLINE" %}
+          <h2 class="online">🟢 ONLINE</h2>
+          {% else %}
+          <h2 class="offline">🔴 OFFLINE</h2>
+          {% endif %}
         </div>
 
-        <h2>Slot Tersedia</h2>
+        <div class="card">
+          <h3>Socket Server</h3>
 
-        <h1>{{ slot }}</h1>
-
-        <p>
-            Mode Aktif:
-            <b>{{ mode_aktif }}</b>
-        </p>
-
-        <div class="menu">
-            <a href="/masuk"> Gate Masuk </a>
-
-            <a href="/keluar"> Gate Keluar </a>
-
-            <a href="/concurrent"> Concurrent Test </a>
-
-            <a href="/monitoring"> Monitoring </a>
+          {% if socket_status == "ONLINE" %}
+          <h2 class="online">🟢 ONLINE</h2>
+          {% else %}
+          <h2 class="offline">🔴 OFFLINE</h2>
+          {% endif %}
         </div>
+      </div>
+
+      <h2>Slot Tersedia</h2>
+
+      <h1>{{ slot }}</h1>
+
+      <p>
+        Mode Aktif:
+        <b>{{ mode_aktif }}</b>
+      </p>
+
+      <div class="menu">
+        <h3>Gate Masuk</h3>
+
+        <div class="button-group">
+          <a href="/masuk"> Gate Masuk RMI </a>
+
+          <a href="/masuk_socket"> Gate Masuk Socket </a>
         </div>
-    </body>
-    </html>
+
+        <h3>Gate Keluar</h3>
+
+        <div class="button-group">
+          <a href="/keluar"> Gate Keluar RMI </a>
+
+          <a href="/keluar_socket"> Gate Keluar Socket </a>
+        </div>
+
+        <a href="/concurrent"> Concurrent Test </a>
+
+        <a href="/monitoring"> Monitoring </a>
+      </div>
+    </div>
+  </body>
+</html>
