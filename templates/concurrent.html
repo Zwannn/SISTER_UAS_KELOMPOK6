@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concurrent Test</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>⚡ Concurrent Access Test</h1>
+
+<form method="POST">
+
+    <button
+        type="submit"
+        name="aksi"
+        value="test">
+
+        Jalankan Pengujian
+
+    </button>
+
+    <button
+        type="submit"
+        name="aksi"
+        value="reset">
+
+        Reset Parking Data
+
+    </button>
+    {% if pesan %}
+
+<div class="card">
+
+    <h3>{{ pesan }}</h3>
+
+</div>
+
+{% endif %}
+
+</form>
+</form>
+
+    <h3>Sisa Slot Setelah Pengujian :
+        {{ slot_akhir }}
+    </h3>
+
+    <table>
+
+        <tr>
+            <th>RFID</th>
+            <th>Hasil</th>
+        </tr>
+
+        {% for item in hasil_test %}
+
+        <tr>
+
+            <td>
+                {{ item.rfid }}
+            </td>
+
+            <td>
+                {{ item.status }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br>
+    <div class="card">
+
+    <h3>📊 Slot Saat Ini</h3>
+
+    <h1>{{ slot_sekarang }}</h1>
+
+</div>
+
+    <a href="/">
+        Kembali Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

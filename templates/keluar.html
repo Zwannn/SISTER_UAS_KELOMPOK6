@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gate Keluar</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚙 Gate Keluar</h1>
+
+    <p>Validasi RFID Kendaraan Keluar</p>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="rfid"
+            placeholder="Contoh: RF001"
+            required>
+
+        <button type="submit">
+            Validasi Keluar
+        </button>
+
+    </form>
+
+    {% if hasil %}
+    <div class="card hasil-box">
+
+        <h3>Hasil Validasi</h3>
+
+        <pre>{{ hasil }}</pre>
+
+    </div>
+    {% endif %}
+
+    <br>
+
+    <a href="/">⬅ Kembali ke Dashboard</a>
+
+</div>
+
+</body>
+</html>

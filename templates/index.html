@@ -1,0 +1,61 @@
+    <!doctype html>
+    <html>
+    <head>
+        <title>Smart Parking System</title>
+
+        <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
+    <body>
+        <div class="container">
+        <h1>🚗 Smart Parking System</h1>
+
+        <p class="subtitle">
+            Distributed Gate Access System menggunakan Java RMI
+        </p>
+
+        <div class="status-container">
+            <div class="card">
+            <h3>RMI Server</h3>
+
+            {% if rmi_status == "ONLINE" %}
+            <h2 class="online">🟢 ONLINE</h2>
+            {% else %}
+            <h2 class="offline">🔴 OFFLINE</h2>
+            {% endif %}
+            </div>
+
+            <div class="card">
+            <h3>Socket Server</h3>
+
+            {% if socket_status == "ONLINE" %}
+            <h2 class="online">🟢 ONLINE</h2>
+            {% else %}
+            <h2 class="offline">🔴 OFFLINE</h2>
+            {% endif %}
+            </div>
+        </div>
+
+        <h2>Slot Tersedia</h2>
+
+        <h1>{{ slot }}</h1>
+
+        <p>
+            Mode Aktif:
+            <b>{{ mode_aktif }}</b>
+        </p>
+
+        <div class="menu">
+            <a href="/masuk"> Gate Masuk </a>
+
+            <a href="/keluar"> Gate Keluar </a>
+
+            <a href="/concurrent"> Concurrent Test </a>
+
+            <a href="/monitoring"> Monitoring </a>
+        </div>
+        </div>
+    </body>
+    </html>
